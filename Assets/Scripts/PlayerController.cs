@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 		moveHorizontal = Input.GetAxis("Horizontal");
 		moveVertical = Input.GetAxis ("Vertical");
 
-		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
+		rb.MovePosition (transform.position + new Vector3 (moveHorizontal, moveVertical, 0.0f));
 
 		if (moveHorizontal != 0.0f) 
 		{
@@ -33,7 +33,5 @@ public class PlayerController : MonoBehaviour {
 		{
 			animator.SetBool ("IsMoving", false);
 		}
-			
-		rb.velocity = movement * speed;
 	}
 }
