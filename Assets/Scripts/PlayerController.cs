@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float jumpHeight;
 
+	public Collider groundCheck;
+
 	public float moveHorizontal, moveVertical;
 
 	Animator animator;
 
 	//Variables to check for jump and double-jump
-	public bool grounded, jumped;
+	public bool grounded, jumped, jumpPress;
 
 	void Start()
 	{
@@ -21,14 +23,10 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
-		//Gets input from arrow keys, A-D, or space bar
 		moveHorizontal = Input.GetAxis ("Horizontal");
-		moveVertical = Input.GetAxis ("Vertical");
-
-		//Allows fluid movement but fall speed is stilltoo slow 
-		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
+		jumpPress = Input.GetButtonDown("Jump");
 
 		//Updates animator
 		if (moveHorizontal != 0.0f) 
@@ -39,26 +37,44 @@ public class PlayerController : MonoBehaviour {
 		{
 			animator.SetBool ("IsMoving", false);
 		}
+			
+	}
 
-		//Checks for jump
-		if (moveVertical != 0.0f) 
+	void FixedUpdate()
+	{
+		//Allows fluid movement but fall speed is still too slow 
+		Vector3 movement = Vector3.zero;
+
+		if (moveHorizontal < 0) 
 		{
+			movement = Vector3.left;
+		} 
+
+		if (moveHorizontal > 0) 
+		{
+			movement = Vector3.right;
+		}
+
+		if (jumpPress) 
+		{
+			movement = Vector3.up * jumpHeight;
+			animator.SetBool ("IsJumped", true);
 			grounded = false;
 			jumped = true;
-			animator.SetBool ("IsJumped", true);
 		}
 
-		if (jumped) 
-		{
-			rb.velocity = new Vector3 (movement.x, jumpHeight, 0.0f);;
-		}
 
 		//Updates movement
 		rb.velocity = movement * speed;
 	}
 
+	void Jump()
+	{
+
+	}
+
 	//Checks if the player is touching the ground
-	void OnTriggerEnter(Collider other) 
+	void OnCollisionEnter(Collider other) 
 	{
 		if (other.CompareTag ("Ground")) 
 		{

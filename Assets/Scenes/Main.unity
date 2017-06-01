@@ -120,7 +120,7 @@ MeshCollider:
   m_GameObject: {fileID: 95475358}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 0
@@ -150,7 +150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: d5099aee201b0fa48b4a9cb0a5e2c947, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: d5099aee201b0fa48b4a9cb0a5e2c947, type: 3}
       propertyPath: m_LocalPosition.z
@@ -401,12 +401,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03509adffe63e49b4abb5deefcd562b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 6
   jumpHeight: 5
+  groundCheck: {fileID: 734781301}
   moveHorizontal: 0
   moveVertical: 0
   grounded: 0
   jumped: 0
+  jumpPress: 0
 --- !u!95 &734781299
 Animator:
   serializedVersion: 3
@@ -428,6 +430,19 @@ Animator:
 Transform:
   m_PrefabParentObject: {fileID: 400010, guid: d5099aee201b0fa48b4a9cb0a5e2c947, type: 3}
   m_PrefabInternal: {fileID: 734781294}
+--- !u!136 &734781301
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734781295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.9140778
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.97222376, z: 0}
 --- !u!1 &963575342
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +589,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 991694672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.55, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 15, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
