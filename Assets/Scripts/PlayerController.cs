@@ -37,7 +37,17 @@ public class PlayerController : MonoBehaviour {
 		{
 			animator.SetBool ("IsMoving", false);
 		}
-			
+
+		//Rotate left
+		if (moveHorizontal < 0) 
+		{
+			transform.eulerAngles = new Vector3 (transform.rotation.x, -90.0f, transform.rotation.z);
+		}
+		//Rotate right
+		if (moveHorizontal > 0) 
+		{
+			transform.eulerAngles = new Vector3 (transform.rotation.x, 90.0f, transform.rotation.z);
+		}
 	}
 
 	void FixedUpdate()
@@ -62,8 +72,7 @@ public class PlayerController : MonoBehaviour {
 			grounded = false;
 			jumped = true;
 		}
-
-
+			
 		//Updates movement
 		rb.velocity = movement * speed;
 	}
@@ -74,9 +83,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//Checks if the player is touching the ground
-	void OnCollisionEnter(Collider other) 
+	void OnCollisionEnter(Collision other) 
 	{
-		if (other.CompareTag ("Ground")) 
+		if(other.collider.CompareTag("Ground")) 
 		{
 			//Booleans and animations are updated accordingly 
 			grounded = true;
